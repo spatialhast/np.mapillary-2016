@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NP@Mapillary 2016</title>
+	
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України">
+	<meta name="keywords" content="OpenStreetMap, Mapillary, ПЗФ, природно-заповідний фонд України">
+	<link rel="shortcut icon" href="assets/icon.png">
+
+	<!-- Facebook -->
+	<meta property='og:type' content='website'/>
+	<meta property="og:title" content="NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України"/>
+	<meta property="og:image" content="http://spatialhast.github.io/np.mapillary/page.png"/>
+	<meta property="og:site_name" content="NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України"/>
+	<meta property="og:description" content="Статистика та карта зібраних фотографій в межах природно-заповідного фонду України"/>
+	<meta property="og:url" content="http://spatialhast.github.io/np.mapillary"/>
+
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:url" content="http://spatialhast.github.io/np.mapillary">
+	<meta name="twitter:title" content="NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України">
+	<meta name="twitter:description" content="Статистика та карта зібраних фотографій в межах природно-заповідного фонду України">
+	<meta name="twitter:image" content="http://spatialhast.github.io/np.mapillary/page.png">
+	
+	<link rel="stylesheet" href="assets/leaflet-0.7.7/leaflet.css" />
+	<link rel="stylesheet" href="assets/bootstrap-3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/bootstrap-table/bootstrap-table.min.css">	
+	<link rel="stylesheet" href="assets/font-awesome-4.2.0/css/font-awesome.min.css">		
+
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+		}
+		html, body, #map {
+			height: 100%;
+			width: 100%;
+		}	
+	</style>
+
+</head>
+
+<body>
+
+	<div id="map" class="map"></div>
+
+	<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України</h4>
+				</div>
+				<div class="modal-body">
+					<p>Cторінка на сайті OpenStreetMap Wiki - <a href="http://wiki.openstreetmap.org/wiki/Uk:NP@Mapillary_2015">link</a>, на форумі OpenStreetMap - <a href="http://forum.openstreetmap.org/viewtopic.php?id=40906">link</a></p>
+					<br>
+					<p>Статистика зібраних фотографій в період проведення конкурсу 01.01.2016 - 18.12.2016 в межах ПЗФ:</p>
+					<table data-toggle="table" data-url="data/table_count_first.json" data-cache="false" data-height="190">
+						<thead>
+							<tr>
+								<th data-field="place" data-formatter="placeNumber">Місце</th>
+								<th data-field="name" data-formatter="linkUserName">Mapillary профіль</th>
+								<th data-field="paname" data-formatter="panameReplace">Об'єкти ПЗФ</th>
+								<th data-field="count">Кількість фото</th>
+							</tr>
+						</thead>
+					</table>
+					<br>
+					<p>Загальна статистика зібраних фотографій в межах ПЗФ:</p>
+					<table data-toggle="table" data-url="data/table_count_second.json" data-cache="false" data-height="240">
+						<thead>
+							<tr>
+								<th data-field="name" data-formatter="linkUserName">Mapillary профіль</th>
+								<th data-field="paname" data-formatter="panameReplace">Об'єкти ПЗФ</th>
+								<th data-field="count">Кількість фото</th>
+							</tr>
+						</thead>
+					</table>	
+					
+					<p><small>Оновлено: 09.05.2016 (оновлення виконується раз на тиждень)</small></p>
+					
+					<p>Для перегляду кордонів ПЗФ та покриття <a href="https://www.mapillary.com/">Mapillary</a> закрийте поточне вікно і перейдіть до карти. Для перегляду об'єкту ПЗФ на сторінці OpenStreetMap на обраному полігоні клікніть мишкою два рази.</p>
+					<p>Конкурс геотегованих фотографій ПЗФ проводиться для об'єктів ПЗФ, які додані в проект <a href="https://www.openstreetmap.org/"> OpenStreetMap </a>. Якщо Вам відомий об'єкт ПЗФ, якого немає на карті - додайте його в проект OpenStreetMap використовуючи теги <a href="http://wiki.openstreetmap.org/wiki/Tag:boundary%3Dprotected_area">'boundary=protected_area'</a>, <a href="http://wiki.openstreetmap.org/wiki/Tag:boundary%3Dnational_park">'boundary=national_park'</a> або напишіть на <a href="http://forum.openstreetmap.org/viewtopic.php?id=40906">сторінці конкурсу</a>.</p>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="assets/jquery-1.11.3.min.js"></script>
+	<script src="assets/leaflet-0.7.7/leaflet.js"></script>
+	<script src="assets/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+	<script src="assets/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="assets/leaflet.easybutton/easy-button.js"></script>	
+	<script src="assets/leaflet-hash.js"></script>	
+	<script src="assets/tangram.min.js"></script>	
+
+	<script>
+
+$("#aboutModal").modal("show");
+
+function placeNumber(value, row, index) {
+	return 1 + index;
+};
+
+function linkUserName(value, row) {
+	return '<a target="_blank" href="https://www.mapillary.com/profile/' + value + '">' + value + '</a>';
+};
+
+function panameReplace(value, row, index) {
+	return JSON.stringify(value).replace(/","/g, ', ').slice(2, -2);
+};
+
+var layerOSM = L.tileLayer('http://{s}.tiles.mapbox.com/v4/mapbox.light/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiaGFzdCIsImEiOiJjaWpvM2txNjkwMDVjdnhseDFxZ3FmcG1uIn0.vodt7RhLLMI65EcUKf9EjA', {
+	attribution: 'Map style &copy; <a href="https://www.mapbox.com/about/maps/">MapBox</a>; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+});
+
+var map = new L.Map('map', {
+	layers: [layerOSM],
+	minZoom: 6,
+	maxZoom: 15,
+	zoom: 7, 
+	center: [48.6, 32.2],
+	maxBounds: new L.LatLngBounds(new L.LatLng(43.9655, 12.4158), new L.LatLng(53.0720, 52.0862))
+});
+
+L.easyButton('fa-list-ul',
+	function() {
+		$('#aboutModal').modal('show');
+		return false;
+	},
+	'About the map'
+	).addTo(map);
+
+var hash = new L.Hash(map);
+
+var nature_conservation_polygon = L.geoJson(null, {
+	style: function(feature) {
+		if (feature.properties.name === null) {
+			return {
+				color: "#ff4c4c",
+				fill: true,
+				opacity: 0.7,
+				weight: 2
+			};
+		} else
+		return {
+			color: "#9ace00",
+			fill: true,
+			opacity: 0.7,
+			weight: 2
+		};
+	},
+	onEachFeature: function(feature, layer_nature_conservation_polygon) {
+		layer_nature_conservation_polygon.on({
+			dblclick: function(e) {
+				var url = 'http://www.openstreetmap.org/' + (feature.properties.osm_id < 0 ? 'relation/' + feature.properties.osm_id * (-1) : 'way/' + feature.properties.osm_id);
+				window.open(url);
+			}
+		});
+	}
+});
+$.getJSON("data/nature_conservation_polygon.geojson", function(data) {
+	nature_conservation_polygon.addData(data);
+});	
+nature_conservation_polygon.addTo(map);	
+
+var layer = Tangram.leafletLayer({ scene: 'assets/scene.yaml' });
+layer.addTo(map);
+
+</script>
+
+</body>
+</html>
