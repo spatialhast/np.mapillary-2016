@@ -246,21 +246,24 @@
             // label http://stackoverflow.com/questions/30531006/centering-text-label-in-mapbox-gl-js
             map.addSource('label', {
                 'type': 'geojson',
-                'data': 'data/pzf_labels.geojson'
+                'data': 'data/point.geojson'
             });
 
             map.addLayer({
                 'id': 'label-style',
                 'type': 'symbol',
                 'source': 'label',
-                'layout': {'text-field': 'name'},
-                //'minzoom': 0,
-                //'maxzoom': 18,
+                'layout': {
+                    'text-field': '{name}',
+                    'text-size': 8
+                },
+                'minzoom': 10,
+                //'maxzoom': 21,
                 //'filter': 18,
                 'paint': {
                     'text-color': 'red'
                 }
-            }); 
+            });
             */
 
              map.addSource('markers', markerSource);
