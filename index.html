@@ -5,16 +5,34 @@
         
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
         <meta name="description" content="NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України">
         <meta name="keywords" content="OpenStreetMap, Mapillary, ПЗФ, природно-заповідний фонд України">
         <link rel="shortcut icon" href="assets/icon.png">
 
-    
-        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.12.4/mapbox-gl.js'></script>
-        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.12.4/mapbox-gl.css' rel='stylesheet' />
-        <link rel="stylesheet" href="https://npmcdn.com/mapillary-js@1.0.1/dist/mapillary-js.min.css">
+        <!-- Facebook -->
+        <meta property='og:type' content='website'/>
+        <meta property="og:title" content="NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України"/>
+        <meta property="og:image" content="https://spatialhast.github.io/np.mapillary-2016/page.png"/>
+        <meta property="og:site_name" content="NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України"/>
+        <meta property="og:description" content="Статистика та карта зібраних фотографій в межах природно-заповідного фонду України"/>
+        <meta property="og:url" content="https://spatialhast.github.io/np.mapillary-2016"/>
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:url" content="https://spatialhast.github.io/np.mapillary-2016">
+        <meta name="twitter:title" content="NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України">
+        <meta name="twitter:description" content="Статистика та карта зібраних фотографій в межах природно-заповідного фонду України">
+        <meta name="twitter:image" content="https://spatialhast.github.io/np.mapillary-2016/page.png">
+
+        <link rel="stylesheet" href="assets/bootstrap-3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/bootstrap-table/bootstrap-table.min.css">	
+        <link rel="stylesheet" href="assets/font-awesome-4.2.0/css/font-awesome.min.css">
         
+        <link rel='stylesheet' href='assets/mapbox-gl/mapbox-gl.css' />
+        <link rel="stylesheet" href="assets/mapillary-js/mapillary-js.min.css" />
+                   
         <style>
         
              body {
@@ -22,7 +40,7 @@
                 margin: 0;
                 overflow: hidden;
              }
-           
+
              .mapillary-js {
                  position: absolute;
                  height: 100%;
@@ -38,23 +56,144 @@
              }
              
              .InSeq {
+                top: 50px;
                 left: 10px;
              }
              
+             .mapboxgl-ctrl-top-left {
+                top: 50px;
+             }
+
+            .navbar .navbar-brand {
+              font-weight: bold;
+              font-size: 25px;
+              color: #FFFFFF;
+            }          
+                         
+            .white {
+              color: #FFFFFF;
+            }    
+            
+            
+            .modal-title {
+                text-align: center;
+            }
+            
+            .logo {
+                text-align: center;
+            }
+                        
+            @media (max-width: 992px) {
+              .navbar .navbar-brand {
+                font-size: 18px;
+              }
+            }
 
         </style>
     </head>
     <body>
+        
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">NP@Mapillary 2016</a>
+            </div>
 
-        <div id='mly'></div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              
+              <!--ul class="nav navbar-nav">
+                <li><a href="#" id="list-btn"><i class="fa fa-list white"></i>&nbsp;&nbsp;Статистика</a></li>
+              </ul-->
+             
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" id="list-btn"><i class="fa fa-list white"></i>&nbsp;&nbsp;Статистика</a></li>
+                <!--li><a href="#" id="about-btn"><i class="fa fa-question-circle white"></i>&nbsp;&nbsp;About</a></li-->
+              </ul>
+              
+            </div>
+          </div>
+        </nav>   
+
         <div id='map'></div>
+        <div id='mly'></div>
         
-        <script src="https://npmcdn.com/mapillary-js@1.0.1/dist/mapillary-js.min.js"></script>
-       
+        <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <p>Статистика зібраних фотографій в період проведення конкурсу з 01.01.2016 по 18.12.2016 в межах ПЗФ України:</p>
+                        <table data-toggle="table" data-url="data/mapillary_data.json" data-cache="false" data-height="190">
+                            <thead>
+                                <tr>
+                                    <th data-field="place" data-formatter="placeNumber">Місце</th>
+                                    <th data-field="name" data-formatter="linkUserName">Mapillary профіль</th>
+                                    <th data-field="paname" data-formatter="panameReplace">Об'єкти ПЗФ України</th>
+                                    <th data-field="count">Кількість фото</th>
+                                </tr>
+                            </thead>
+                        </table>
+                       
+                        <p><small>Оновлено: 12.05.2016 (оновлення виконується раз на тиждень)</small></p>
+     
+                        <p>Конкурс геотегованих фотографій ПЗФ проводиться для об'єктів ПЗФ, які додані в проект <a href="https://www.openstreetmap.org/"> OpenStreetMap </a>. Якщо Вам відомий об'єкт ПЗФ якого немає на карті - додайте його в проект OpenStreetMap використовуючи теги <a href="https://wiki.openstreetmap.org/wiki/Tag:boundary%3Dprotected_area">'boundary=protected_area'</a>, <a href="https://wiki.openstreetmap.org/wiki/Tag:boundary%3Dnational_park">'boundary=national_park'</a> або напишіть на <a href="http://forum.openstreetmap.org/viewtopic.php?id=54547">сторінці конкурсу</a>.</p>
+                        
+                        <p>Для перегляду кордонів природно-заповідного фонду України та покриття геотегованих фотографій <a href="https://www.mapillary.com/">Mapillary</a> закрийте поточне вікно і натисніть кнопку перегляду фотографій. Для перегляду зображень використовуйте кнопки переміщення у вікні перегляду фотографій або натисніть в будь-якому місці треку на карті</p>
+                        
+                        <p>Cторінка на сайті OpenStreetMap Wiki - <a href="http://wiki.openstreetmap.org/wiki/Uk:NP@Mapillary_2016">link</a>, на форумі OpenStreetMap - <a href="http://forum.openstreetmap.org/viewtopic.php?id=54547">link</a></p>
+                        
+                        <div class="logo">
+                            <a href="http://openstreetmap.org.ua/" target="_blank">
+                                <img src="assets/osm_logo.png" alt="OpenStreetMap">
+                            </a>
+                            <a href="https://www.mapillary.com/map" target="_blank">
+                                <img src="assets/mapillary_logo.png" alt="Mapillary">
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script src="assets/jquery-1.11.3.min.js"></script>
+        <script src="assets/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+        <script src="assets/bootstrap-table/bootstrap-table.min.js"></script> 
+        
+        <script src='assets/mapbox-gl/mapbox-gl.js'></script>       
+        <script src="assets/mapillary-js/mapillary-js.min.js"></script>
+              
         <script>
-        
+
          // inspired by @jesolem, https://github.com/jesolem/mytown
+                
+        $("#list-btn").click(function() {
+          $("#aboutModal").modal("show");
+          return false;
+        });
         
+        function placeNumber(value, row, index) {
+            return 1 + index;
+        };
+
+        function linkUserName(value, row) {
+            return '<a target="_blank" href="https://www.mapillary.com/profile/' + value + '">' + value + '</a>';
+        };
+        
+        function panameReplace(value, row, index) {
+            return JSON.stringify(value).replace(/","/g, ', ').slice(2, -2);
+        };
+
          mapboxgl.accessToken = 'pk.eyJ1IjoiaGFzdCIsImEiOiJjaW8yb2J5b3kwMHg3dnZseTNoZ2JkbXllIn0.bd3CWy4tlOrSgX3g_PPi_w';
          var map = new mapboxgl.Map({
              container: 'map',
@@ -63,7 +202,7 @@
              zoom: 4
          });
 
-         map.addControl(new mapboxgl.Navigation({ position: 'bottom-right' }));
+         map.addControl(new mapboxgl.Navigation({ position: 'top-left' }));
          
          var markerSource = {
              type: 'geojson',
@@ -87,15 +226,8 @@
              maxzoom: 16
          };
 
-
-         
-         
          map.on('style.load', function() {
-             
 
-             
-             
-             
             map.addSource('pzf', {
                 'type': 'geojson',
                 'data': 'data/pzf.geojson'
@@ -111,8 +243,7 @@
                     'fill-outline-color': '#AED540',
                 }
             });
-     
-             
+                  
              /*
             // label http://stackoverflow.com/questions/30531006/centering-text-label-in-mapbox-gl-js
             map.addSource('label', {
@@ -133,10 +264,7 @@
                 }
             }); 
              */
-             
-             
-             
-             
+
              map.addSource('markers', markerSource);
              map.addLayer({
                  'id': 'markers',
@@ -182,22 +310,20 @@
                 'layout': {
                     'text-field': '{username}',
                     'symbol-placement': 'line',
-                    'text-size': 10
+                    'text-size': 12
                     //'text-halo-color': '#E88D00',
                     //'text-halo-width': 2,
                     //'text-halo-blur': 2
                 },
-                'minzoom': 12,
+                'minzoom': 10,
                 'maxzoom': 21,
                 'filter': [">", 'captured_at', '1451606400000'], 
                 'paint': {
                     'text-color': '#3D30A9'
                 }
             });
-            
-            
 
-     
+            $("#aboutModal").modal("show");
 
          });
 
@@ -226,24 +352,13 @@
                  zoom: 15
              });
              
-             console.log(node.latLon.lon + ", " + node.latLon.lat)
+             //console.log(node.latLon.lon + ", " + node.latLon.lat)
          });
 
          map.on('click', function(e) {
              mly.moveCloseTo(e.lngLat.lat, e.lngLat.lng);
          });
-             
-             
-             
-             
-  
-             
-             
-             
-             
-             
-             
-             
+                        
         </script>
     </body>
 </html>
