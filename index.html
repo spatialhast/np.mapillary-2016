@@ -73,8 +73,7 @@
             .white {
               color: #FFFFFF;
             }    
-            
-            
+                        
             .modal-title {
                 text-align: center;
             }
@@ -133,7 +132,7 @@
                     <div class="modal-body">
 
                         <p>Статистика зібраних фотографій в період проведення конкурсу з 01.01.2016 по 18.12.2016 в межах ПЗФ України:</p>
-                        <table data-toggle="table" data-url="data/mapillary_data.json" data-cache="false" data-height="190">
+                        <table data-toggle="table" data-url="data/mapillary_data.json" data-cache="false"> <!-- data-height="190" --> 
                             <thead>
                                 <tr>
                                     <th data-field="place" data-formatter="placeNumber">Місце</th>
@@ -143,7 +142,6 @@
                                 </tr>
                             </thead>
                         </table>
-                       
                         <p><small>Оновлено: 12.05.2016 (оновлення виконується раз на тиждень)</small></p>
      
                         <p>Конкурс геотегованих фотографій ПЗФ проводиться для об'єктів ПЗФ, які додані в проект <a href="https://www.openstreetmap.org/"> OpenStreetMap </a>. Якщо Вам відомий об'єкт ПЗФ якого немає на карті - додайте його в проект OpenStreetMap використовуючи теги <a href="https://wiki.openstreetmap.org/wiki/Tag:boundary%3Dprotected_area">'boundary=protected_area'</a>, <a href="https://wiki.openstreetmap.org/wiki/Tag:boundary%3Dnational_park">'boundary=national_park'</a> або напишіть на <a href="http://forum.openstreetmap.org/viewtopic.php?id=54547">сторінці конкурсу</a>.</p>
@@ -244,7 +242,7 @@
                 }
             });
                   
-             /*
+            /*
             // label http://stackoverflow.com/questions/30531006/centering-text-label-in-mapbox-gl-js
             map.addSource('label', {
                 'type': 'geojson',
@@ -263,7 +261,7 @@
                     'text-color': 'red'
                 }
             }); 
-             */
+            */
 
              map.addSource('markers', markerSource);
              map.addLayer({
