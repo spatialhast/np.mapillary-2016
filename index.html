@@ -81,7 +81,11 @@
             .logo {
                 text-align: center;
             }
-                        
+               
+            .mapboxgl-map {
+                font: 11px/16px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+            }
+               
             @media (max-width: 992px) {
               .navbar .navbar-brand {
                 font-size: 18px;
@@ -300,7 +304,6 @@
                      'line-width': 3
                  }
              }, 'markers');
-             
 
             //  mapillary sequences label
             map.addLayer({
@@ -325,7 +328,7 @@
             });
 
             $("#aboutModal").modal("show");
-
+            
          });
 
          var mly = new Mapillary.Viewer('mly',
@@ -352,14 +355,12 @@
                  center: lnglat,
                  zoom: 15
              });
-             
-             //console.log(node.latLon.lon + ", " + node.latLon.lat)
          });
 
          map.on('click', function(e) {
              mly.moveCloseTo(e.lngLat.lat, e.lngLat.lng);
          });
-                        
+          
         </script>
     </body>
 </html>
