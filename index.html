@@ -168,6 +168,20 @@
             </div>
         </div>
         
+        <div class="modal fade" id="warningModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Your browser does not support Mapbox GL. Please enable WebGL in your browser.</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p><a href="http://superuser.com/questions/836832/how-can-i-enable-webgl-in-my-browser">How can I enable WebGL in my browser?</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <script src="assets/jquery-1.11.3.min.js"></script>
         <script src="assets/bootstrap-3.3.5/js/bootstrap.min.js"></script>
         <script src="assets/bootstrap-table/bootstrap-table.min.js"></script> 
@@ -197,6 +211,15 @@
         };
 
          mapboxgl.accessToken = 'pk.eyJ1IjoiaGFzdCIsImEiOiJjaW8yb2J5b3kwMHg3dnZseTNoZ2JkbXllIn0.bd3CWy4tlOrSgX3g_PPi_w';
+         
+        if (!mapboxgl.supported()) {
+            //alert('Your browser does not support Mapbox GL. Please enable WebGL in your browser.');
+            $("#warningModal").modal("show");
+        } else { 
+            console.log('Your browser supported Mapbox GL');
+            $("#aboutModal").modal("show");
+        };
+         
          var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/light-v8',
@@ -345,9 +368,7 @@
                     'text-color': '#3D30A9'
                 }
             });
-
-            $("#aboutModal").modal("show");
-            
+          
          });
 
          var mly = new Mapillary.Viewer('mly',
