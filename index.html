@@ -198,12 +198,31 @@
 
          mapboxgl.accessToken = 'pk.eyJ1IjoiaGFzdCIsImEiOiJjaW8yb2J5b3kwMHg3dnZseTNoZ2JkbXllIn0.bd3CWy4tlOrSgX3g_PPi_w';
          var map = new mapboxgl.Map({
-             container: 'map',
-             style: 'mapbox://styles/mapbox/light-v8',
-             center: [32.2, 48.6],
-             zoom: 4
+            container: 'map',
+            style: 'mapbox://styles/mapbox/light-v8',
+            /*
+            style: {
+                "version": 8,
+                "sources": {
+                    "raster-tiles": {
+                        "type": "raster",
+                        "url": "mapbox://mapbox.light",
+                        "tileSize": 256
+                    }
+                },
+                "layers": [{
+                    "id": "simple-tiles",
+                    "type": "raster",
+                    "source": "raster-tiles",
+                    "minzoom": 0,
+                    "maxzoom": 22
+                }]
+            },
+            */
+            center: [32.2, 48.6],
+            zoom: 4
          });
-
+         
          map.addControl(new mapboxgl.Navigation({ position: 'top-left' }));
          
          var markerSource = {
