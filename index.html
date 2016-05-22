@@ -368,7 +368,23 @@
                     'text-color': '#3D30A9'
                 }
             });
-          
+                       
+            map.addSource('photos', {
+                'type': 'geojson',
+                'data': 'data/photo_point.geojson'
+            });
+            map.addLayer({
+                'id': 'photos',
+                'type': 'circle',
+                'source': 'photos',
+                'layout': {},
+                'paint': {
+                    "circle-radius": 3,
+                    "circle-color": "#004C00",
+                    "circle-opacity ": 0.2
+                }
+            });
+
          });
 
          var mly = new Mapillary.Viewer('mly',
