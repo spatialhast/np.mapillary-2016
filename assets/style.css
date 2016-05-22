@@ -1,0 +1,56 @@
+body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.mapillary-js {
+    position: absolute;
+    height: 100%;
+    width: 60%;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 40%;
+}
+
+.InSeq {
+    top: 50px;
+    left: 10px;
+}
+
+.mapboxgl-ctrl-top-left 
+    top: 50px;
+}
+
+.navbar.navbar-brand {
+    font-weight: bold;
+    font-size: 25px;
+    color: #FFFFFF;
+}
+
+.white {
+    color: #FFFFFF;
+}
+
+.modal-title {
+    text-align: center;
+}
+
+.logo {
+    text-align: center;
+}
+
+.mapboxgl-map {
+    font: 11px/16px 'HelveticaNeue', Arial, Helvetica, sans-serif;
+}
+
+@media (max-width: 992px) {
+    .navbar.navbar-brand {
+        font-size: 18px;
+    }
+}
