@@ -23,7 +23,7 @@ body {
     left: 10px;
 }
 
-.mapboxgl-ctrl-top-left 
+.mapboxgl-ctrl-top-left {
     top: 50px;
 }
 
