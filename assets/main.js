@@ -25,10 +25,44 @@ if (!mapboxgl.supported()) {
     $("#aboutModal").modal("show");
 };
 
+var pLocation = {
+  "1": {
+    center: [36.242377, 50.056827],
+    p_key: '4PRDR8DUPLgDS7-hw6_utA'
+  },
+  "2": {
+    center: [24.480444, 51.488236],
+    p_key: '52i8_YjbKJWpPZmbHGZqlg'
+  },
+  "3": {
+    center: [24.675317, 51.548634],
+    p_key: 'QGWoGa28Dl9SGL3xWiznoQ'
+  },
+  "4": {
+    center: [30.490125, 50.608115],
+    p_key: 'z3DwyBh92-VCUikjaTdzNQ'
+  },
+  "5": {
+    center: [23.846695, 51.481067],
+    p_key: 'Q2oMm_qooLxBf_vbw3XZvw'
+  }
+};
+
+function randomInteger(min, max) {
+    var rand = min + Math.random() * (max + 1 - min);
+    rand = Math.floor(rand);
+    return rand;
+};
+
+var locNumber = randomInteger(1, 5);
+
+var center = pLocation[locNumber].center,
+    p_key = pLocation[locNumber].p_key;
+    
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/light-v8',
-    center: [32.2, 48.6],
+    center: center,
     zoom: 4
 });
 
@@ -42,7 +76,7 @@ var markerSource = {
         type: 'Feature',
         geometry: {
             type: 'Point',
-            coordinates: [36.2423, 50.0568]
+            coordinates: center
         },
         properties: {
             title: 'You\'re here!',
@@ -182,9 +216,7 @@ map.on('style.load', function() {
 
 });
 
-var mly = new Mapillary.Viewer('mly',
-    'WTlZaVBSWmxRX3dQODVTN2gxWVdGUTowNDlmNDBhNjRhYmM3ZmVl',
-    '4PRDR8DUPLgDS7-hw6_utA');
+var mly = new Mapillary.Viewer('mly', 'WTlZaVBSWmxRX3dQODVTN2gxWVdGUTowNDlmNDBhNjRhYmM3ZmVl', p_key);
 
 mly.on('nodechanged', function(node) {
     var lnglat = [node.latLon.lon, node.latLon.lat];
