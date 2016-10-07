@@ -1,5 +1,5 @@
 // inspired by @jesolem, https://github.com/jesolem/mytown
-$("#list-btn").click(function() {
+$("#list-btn").click(function () {
     $("#aboutModal").modal("show");
     return false;
 });
@@ -26,26 +26,26 @@ if (!mapboxgl.supported()) {
 };
 
 var pLocation = {
-  "1": {
-    center: [36.242377, 50.056827],
-    p_key: '4PRDR8DUPLgDS7-hw6_utA'
-  },
-  "2": {
-    center: [24.480444, 51.488236],
-    p_key: '52i8_YjbKJWpPZmbHGZqlg'
-  },
-  "3": {
-    center: [24.675317, 51.548634],
-    p_key: 'QGWoGa28Dl9SGL3xWiznoQ'
-  },
-  "4": {
-    center: [30.490125, 50.608115],
-    p_key: 'z3DwyBh92-VCUikjaTdzNQ'
-  },
-  "5": {
-    center: [23.846695, 51.481067],
-    p_key: 'Q2oMm_qooLxBf_vbw3XZvw'
-  }
+    "1": {
+        center: [36.242377, 50.056827],
+        p_key: '4PRDR8DUPLgDS7-hw6_utA'
+    },
+    "2": {
+        center: [24.480444, 51.488236],
+        p_key: '52i8_YjbKJWpPZmbHGZqlg'
+    },
+    "3": {
+        center: [24.675317, 51.548634],
+        p_key: 'QGWoGa28Dl9SGL3xWiznoQ'
+    },
+    "4": {
+        center: [30.490125, 50.608115],
+        p_key: 'z3DwyBh92-VCUikjaTdzNQ'
+    },
+    "5": {
+        center: [23.846695, 51.481067],
+        p_key: 'Q2oMm_qooLxBf_vbw3XZvw'
+    }
 };
 
 function randomInteger(min, max) {
@@ -58,7 +58,7 @@ var locNumber = randomInteger(1, 5);
 
 var center = pLocation[locNumber].center,
     p_key = pLocation[locNumber].p_key;
-    
+
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/light-v8',
@@ -85,14 +85,64 @@ var markerSource = {
     }
 };
 
-var mapillarySource = {
-    type: 'vector',
-    tiles: ['https://d2munx5tg0hw47.cloudfront.net/tiles/{z}/{x}/{y}.mapbox'],
-    minzoom: 0,
-    maxzoom: 16
-};
 
-map.on('style.load', function() {
+map.on('style.load', function () {
+    initLayers();
+});
+
+
+function initLayers() {
+
+    var mapillaryCoverage = {
+        type: 'vector',
+        tiles: ['http://d25uarhxywzl1j.cloudfront.net/v0.1/{z}/{x}/{y}.mvt'],
+        minzoom: 2,
+        maxzoom: 14
+    };
+
+    // Mapillary coverage
+    map.addSource("mapillaryCoverage", mapillaryCoverage);
+    var mapillaryCoverageLine = {
+        "id": "mapillaryCoverageLine",
+        "type": "line",
+        "source": "mapillaryCoverage",
+        "source-layer": "mapillary-sequences",
+        "filter": [">", "captured_at", 1451606400000],
+        "layout": {
+            "visibility": "visible"
+        },
+        "paint": {
+            'line-opacity': 0.7,
+            'line-color': '#E88D00',
+            'line-width': 3
+        }
+    };
+
+    // Mapillary coverage labels
+    // map.addSource("mapillaryCoverageLabels", mapillaryCoverage);
+    // var mapillaryCoverageLabels = {
+    //     'id': 'mapillaryCoverageLabels',
+    //     'type': 'symbol',
+    //     'source': 'mapillaryCoverage',
+    //     'source-layer': 'mapillary-sequences',
+    //     'layout': {
+    //         "visibility": "visible",
+    //         'text-field': '{userkey}',
+    //         'symbol-placement': 'line',
+    //         'text-size': 12
+    //     },
+    //     'minzoom': 10,
+    //     'maxzoom': 21,
+    //     "filter": [">", "captured_at", 1451606400000],
+    //     'paint': {
+    //         'text-color': '#3D30A9',
+    //         'text-halo-color': '#FFFFFF',
+    //         'text-halo-width': 1.5
+    //     }
+    // };
+
+    map.addLayer(mapillaryCoverageLine, 'sequences');
+    //map.addLayer(mapillaryCoverageLabels, 'sequencesLabels');
 
     // GeoJSON PZF layer
     map.addSource('pzf', {
@@ -103,7 +153,9 @@ map.on('style.load', function() {
         'id': 'pzfId',
         'type': 'fill',
         'source': 'pzf',
-        'layout': {},
+        'layout': {
+            "visibility": "visible"
+        },
         'paint': {
             'fill-color': '#9ace00',
             'fill-opacity': 0.3,
@@ -111,48 +163,6 @@ map.on('style.load', function() {
         }
     });
 
-    /*
-    // label http://stackoverflow.com/questions/30531006/centering-text-label-in-mapbox-gl-js
-    map.addSource('label', {
-            'type': 'geojson',
-            'data': 'data/point.geojson'
-        });
-
-        map.addLayer({
-            'id': 'label-style',
-            'type': 'symbol',
-            'source': 'label',
-            'layout': {
-                'text-field': '{name}',
-                'text-size': 8
-            },
-            'minzoom': 10,
-            //'maxzoom': 21,
-            //'filter': 18,
-            'paint': {
-                'text-color': 'red'
-            }
-        });
-        */
-
-    // mapillary sequences
-    map.addSource('mapillary', mapillarySource);
-    map.addLayer({
-        'id': 'mapillary',
-        'type': 'line',
-        'source': 'mapillary',
-        'source-layer': 'mapillary-sequences',
-        'filter': [">", 'captured_at', '1451606400000'],
-        'layout': {
-            'line-cap': 'round',
-            'line-join': 'round'
-        },
-        'paint': {
-            'line-opacity': 0.7,
-            'line-color': '#E88D00',
-            'line-width': 3
-        }
-    }, 'markers');
 
     // GeoJSON photos layer
     map.addSource('photos', {
@@ -163,35 +173,15 @@ map.on('style.load', function() {
         'id': 'photos',
         'type': 'circle',
         'source': 'photos',
-        'layout': {},
+        'layout': {
+            "visibility": "visible"
+        },
         'paint': {
             "circle-radius": 3,
             "circle-color": "#004C00",
-            "circle-opacity ": 0.2
+            "circle-opacity": 0.2
         }
     });
-
-    // mapillary sequences label
-    map.addLayer({
-        'id': 'mapillary-label-style',
-        'type': 'symbol',
-        'source': 'mapillary',
-        'source-layer': 'mapillary-sequences',
-        'layout': {
-            'text-field': '{username}',
-            'symbol-placement': 'line',
-            'text-size': 12
-        },
-        'minzoom': 10,
-        'maxzoom': 21,
-        'filter': [">", 'captured_at', '1451606400000'],
-        'paint': {
-            'text-color': '#3D30A9',
-            'text-halo-color': '#FFFFFF',
-            'text-halo-width': 1.5
-        }
-    });
-
 
     // photo position marker    
     map.addSource('markers', markerSource);
@@ -208,38 +198,90 @@ map.on('style.load', function() {
 
         },
         'paint': {
-            'text-size': 12,
             'text-halo-color': '#FFFFFF',
             'text-halo-width': 1.5
         }
     });
 
-});
+
+    /*
+        // label http://stackoverflow.com/questions/30531006/centering-text-label-in-mapbox-gl-js
+        map.addSource('label', {
+            'type': 'geojson',
+            'data': 'data/point.geojson'
+        });
+    
+        map.addLayer({
+            'id': 'label-style',
+            'type': 'symbol',
+            'source': 'label',
+            'layout': {
+                'text-field': '{name}',
+                'text-size': 8
+            },
+            'minzoom': 10,
+            'maxzoom': 21
+            //'filter': 18,
+            'paint': {
+                'text-color': 'red'
+            }
+        });
+    */
+
+
+
+    /*
+        
+        // mapillary sequences label
+        map.addLayer({
+            'id': 'mapillary-label-style',
+            'type': 'symbol',
+            'source': 'mapillary',
+            'source-layer': 'mapillary-sequences',
+            'layout': {
+                'text-field': '{username}',
+                'symbol-placement': 'line'
+                //'text-size': 12
+            },
+            'minzoom': 10,
+            'maxzoom': 21,
+            'filter': [">", 'captured_at', '1451606400000'],
+            'paint': {
+                'text-color': '#3D30A9',
+                'text-halo-color': '#FFFFFF',
+                'text-halo-width': 1.5
+            }
+        });
+    
+    */
+
+
+
+};
 
 var mly = new Mapillary.Viewer('mly', 'WTlZaVBSWmxRX3dQODVTN2gxWVdGUTowNDlmNDBhNjRhYmM3ZmVl', p_key);
 
-mly.on('nodechanged', function(node) {
+mly.on('nodechanged', function (node) {
     var lnglat = [node.latLon.lon, node.latLon.lat];
-    var tempSource = new mapboxgl.GeoJSONSource({
-        data: {
-            type: 'Feature',
-            geometry: {
-                type: 'Point',
-                coordinates: lnglat
-            },
-            properties: {
-                title: 'You\'re here!',
-                'marker-symbol': 'marker'
-            }
+    var data = {
+        type: 'Feature',
+        geometry: {
+            type: 'Point',
+            coordinates: lnglat
+        },
+        properties: {
+            title: 'You\'re here!',
+            'marker-symbol': 'marker'
         }
-    });
-    map.getSource('markers').setData(tempSource._data);
+    };
+
+    map.getSource('markers').setData(data);
     map.flyTo({
         center: lnglat,
         zoom: 15
     });
 });
 
-map.on('click', function(e) {
+map.on('click', function (e) {
     mly.moveCloseTo(e.lngLat.lat, e.lngLat.lng);
 });

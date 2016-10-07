@@ -1,134 +1,140 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>NP@Mapillary 2016</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="description" content="NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України">
-        <meta name="keywords" content="OpenStreetMap, Mapillary, ПЗФ, природно-заповідний фонд України">
-        <link rel="shortcut icon" href="assets/icon.png">
 
-        <!-- Facebook -->
-        <meta property='og:type' content='website'/>
-        <meta property="og:title" content="NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України"/>
-        <meta property="og:image" content="https://spatialhast.github.io/np.mapillary-2016/page.png"/>
-        <meta property="og:site_name" content="NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України"/>
-        <meta property="og:description" content="Статистика та карта зібраних фотографій в межах природно-заповідного фонду України"/>
-        <meta property="og:url" content="https://spatialhast.github.io/np.mapillary-2016"/>
+<head>
+    <meta charset="utf-8">
+    <title>NP@Mapillary 2016</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="description" content="NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України">
+    <meta name="keywords" content="OpenStreetMap, Mapillary, ПЗФ, природно-заповідний фонд України">
+    <link rel="shortcut icon" href="assets/icon.png">
 
-        <!-- Twitter -->
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:url" content="https://spatialhast.github.io/np.mapillary-2016">
-        <meta name="twitter:title" content="NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України">
-        <meta name="twitter:description" content="Статистика та карта зібраних фотографій в межах природно-заповідного фонду України">
-        <meta name="twitter:image" content="https://spatialhast.github.io/np.mapillary-2016/page.png">
+    <!-- Facebook -->
+    <meta property='og:type' content='website' />
+    <meta property="og:title" content="NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України" />
+    <meta property="og:image" content="https://spatialhast.github.io/np.mapillary-2016/page.png" />
+    <meta property="og:site_name" content="NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України"
+    />
+    <meta property="og:description" content="Статистика та карта зібраних фотографій в межах природно-заповідного фонду України"
+    />
+    <meta property="og:url" content="https://spatialhast.github.io/np.mapillary-2016" />
 
-        <link rel="stylesheet" href="assets/bootstrap-3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/bootstrap-table/bootstrap-table.min.css">	
-        <link rel="stylesheet" href="assets/font-awesome-4.2.0/css/font-awesome.min.css">
-        
-        <link rel='stylesheet' href='assets/mapbox-gl/mapbox-gl.css' />
-        <link rel="stylesheet" href="assets/mapillary-js/mapillary-js.min.css" />
-        <link rel="stylesheet" href="assets/style.css" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://spatialhast.github.io/np.mapillary-2016">
+    <meta name="twitter:title" content="NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України">
+    <meta name="twitter:description" content="Статистика та карта зібраних фотографій в межах природно-заповідного фонду України">
+    <meta name="twitter:image" content="https://spatialhast.github.io/np.mapillary-2016/page.png">
 
-    </head>
-    <body>
-        
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-          <div class="container-fluid">
+    <link rel="stylesheet" href="assets/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/bootstrap-table/dist/bootstrap-table.min.css">
+    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+
+    <link rel='stylesheet' href='assets/mapbox-gl/dist/mapbox-gl.css' />
+    <link rel="stylesheet" href="assets/mapillary-js/dist/mapillary-js.min.css" />
+    <link rel="stylesheet" href="assets/style.css" />
+
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
             <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">NP@Mapillary 2016</a>
+                <a class="navbar-brand" href="#">NP@Mapillary 2016</a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              
-              <!--ul class="nav navbar-nav">
-                <li><a href="#" id="list-btn"><i class="fa fa-list white"></i>&nbsp;&nbsp;Статистика</a></li>
-              </ul-->
-             
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" id="list-btn"><i class="fa fa-list white"></i>&nbsp;&nbsp;Статистика</a></li>
-                <!--li><a href="#" id="about-btn"><i class="fa fa-question-circle white"></i>&nbsp;&nbsp;About</a></li-->
-              </ul>
-              
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" id="list-btn"><i class="fa fa-list white"></i>&nbsp;&nbsp;Статистика</a></li>
+                </ul>
             </div>
-          </div>
-        </nav>   
+        </div>
+    </nav>
 
+    <div id="container">
         <div id='map'></div>
         <div id='mly'></div>
-        
-        <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України</h4>
-                    </div>
-                    <div class="modal-body">
+    </div>
 
-                        <p>Статистика зібраних фотографій в період проведення конкурсу з 01.01.2016 по 18.12.2016 в межах ПЗФ України:</p>
-                        <table data-toggle="table" data-url="data/mapillary_data.json" data-cache="false" data-height="520" > 
-                            <thead>
-                                <tr>
-                                    <th data-field="place" data-formatter="placeNumber">Місце</th>
-                                    <th data-field="name" data-formatter="linkUserName">Mapillary профіль</th>
-                                    <th data-field="paname" data-formatter="panameReplace">Об'єкти ПЗФ України</th>
-                                    <th data-field="count">Кількість фото</th>
-                                </tr>
-                            </thead>
-                        </table>
-                        <p><small>Оновлено: 03.10.2016</small></p>
-     
-                        <p>Конкурс геотегованих фотографій ПЗФ проводиться для об'єктів ПЗФ, які додані в проект <a href="https://www.openstreetmap.org/"> OpenStreetMap </a>. Якщо Вам відомий об'єкт ПЗФ якого немає на карті - додайте його в проект OpenStreetMap використовуючи теги <a href="https://wiki.openstreetmap.org/wiki/Tag:boundary%3Dprotected_area">'boundary=protected_area'</a>, <a href="https://wiki.openstreetmap.org/wiki/Tag:boundary%3Dnational_park">'boundary=national_park'</a> або напишіть на <a href="http://forum.openstreetmap.org/viewtopic.php?id=54547">сторінці конкурсу</a>.</p>
-                        
-                        <p>Для перегляду кордонів природно-заповідного фонду України та покриття геотегованих фотографій <a href="https://www.mapillary.com/">Mapillary</a> закрийте поточне вікно і натисніть кнопку перегляду фотографій. Для перегляду зображень використовуйте кнопки переміщення у вікні перегляду фотографій або натисніть в будь-якому місці треку на карті</p>
-                        
-                        <p>Cторінка на сайті OpenStreetMap Wiki - <a href="http://wiki.openstreetmap.org/wiki/Uk:NP@Mapillary_2016">link</a>, на форумі OpenStreetMap - <a href="http://forum.openstreetmap.org/viewtopic.php?id=54547">link</a></p>
-                        
-                        <div class="logo">
-                            <a href="http://openstreetmap.org.ua/" target="_blank">
-                                <img src="assets/osm_logo.png" alt="OpenStreetMap">
-                            </a>
-                            <a href="https://www.mapillary.com/" target="_blank">
-                                <img src="assets/mapillary_logo.png" alt="Mapillary">
-                            </a>
-                        </div>
-                        
+
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">NP@Mapillary 2016 - конкурс геотегованих фото природно-заповідного фонду України</h4>
+                </div>
+                <div class="modal-body">
+
+                    <p>Статистика зібраних фотографій в період проведення конкурсу з 01.01.2016 по 18.12.2016 в межах ПЗФ України:</p>
+                    <table data-toggle="table" data-url="data/mapillary_data.json" data-cache="false" data-height="520">
+                        <thead>
+                            <tr>
+                                <th data-field="place" data-formatter="placeNumber">Місце</th>
+                                <th data-field="name" data-formatter="linkUserName">Mapillary профіль</th>
+                                <th data-field="paname" data-formatter="panameReplace">Об'єкти ПЗФ України</th>
+                                <th data-field="count">Кількість фото</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <p><small>Оновлено: 07.10.2016</small></p>
+
+                    <p>Конкурс геотегованих фотографій ПЗФ проводиться для об'єктів ПЗФ, які додані в проект <a href="https://www.openstreetmap.org/"> OpenStreetMap </a>.
+                        Якщо Вам відомий об'єкт ПЗФ якого немає на карті - додайте його в проект OpenStreetMap використовуючи
+                        теги <a href="https://wiki.openstreetmap.org/wiki/Tag:boundary%3Dprotected_area">'boundary=protected_area'</a>,
+                        <a href="https://wiki.openstreetmap.org/wiki/Tag:boundary%3Dnational_park">'boundary=national_park'</a>                        або напишіть на <a href="http://forum.openstreetmap.org/viewtopic.php?id=54547">сторінці конкурсу</a>.</p>
+
+                    <p>Для перегляду кордонів природно-заповідного фонду України та покриття геотегованих фотографій <a href="https://www.mapillary.com/">Mapillary</a>                        закрийте поточне вікно і натисніть кнопку перегляду фотографій. Для перегляду зображень використовуйте
+                        кнопки переміщення у вікні перегляду фотографій або натисніть в будь-якому місці треку на карті</p>
+
+                    <p>Cторінка на сайті OpenStreetMap Wiki - <a href="http://wiki.openstreetmap.org/wiki/Uk:NP@Mapillary_2016">link</a>,
+                        на форумі OpenStreetMap - <a href="http://forum.openstreetmap.org/viewtopic.php?id=54547">link</a></p>
+
+                    <div class="logo">
+                        <a href="https://www.mapillary.com/" target="_blank">
+                            <img src="assets/mapillary_logo.png" alt="Mapillary">
+                        </a>
+                        <a href="http://openstreetmap.org.ua/" target="_blank">
+                            <img src="assets/osm_logo.png" alt="OpenStreetMap">
+                        </a>
                     </div>
+
                 </div>
             </div>
         </div>
-        
-        <div class="modal fade" id="warningModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Your browser does not support Mapbox GL. Please enable WebGL in your browser.</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p><a href="http://superuser.com/questions/836832/how-can-i-enable-webgl-in-my-browser">How can I enable WebGL in my browser?</a></p>
-                    </div>
+    </div>
+
+    <div class="modal fade" id="warningModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Your browser does not support Mapbox GL. Please enable WebGL in your browser.</h4>
+                </div>
+                <div class="modal-body">
+                    <p><a href="http://superuser.com/questions/836832/how-can-i-enable-webgl-in-my-browser">How can I enable WebGL in my browser?</a></p>
                 </div>
             </div>
         </div>
-        
-        <script src="assets/jquery-1.11.3.min.js"></script>
-        <script src="assets/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-        <script src="assets/bootstrap-table/bootstrap-table.min.js"></script> 
-        
-        <script src='assets/mapbox-gl/mapbox-gl.js'></script>       
-        <script src="assets/mapillary-js/mapillary-js.min.js"></script>
-        <script src="assets/main.js"></script>
- 
-    </body>
+    </div>
+
+    <script src="assets/jquery/dist/jquery.min.js"></script>
+    <script src="assets/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="assets/bootstrap-table/dist/bootstrap-table.min.js"></script>
+
+    <script src='assets/mapbox-gl//dist/mapbox-gl.js'></script>
+    <script src="assets/mapillary-js/dist/mapillary-js.min.js"></script>
+    <script src="assets/main.js"></script>
+
+</body>
+
 </html>
