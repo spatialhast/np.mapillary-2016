@@ -3,14 +3,14 @@ html, body, #container {
   width: 100%;
   overflow: hidden;
 }
+
 body {
   padding-top: 50px;
 }
 
-
 .mapillary-js {
     position: absolute;
-    height: 96%;
+    height: 95.5%;
     width: 60%;
 }
 
