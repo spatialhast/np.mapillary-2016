@@ -16,7 +16,7 @@ function panameReplace(value, row, index) {
     return JSON.stringify(value).replace(/","/g, ', ').slice(2, -2);
 };
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiaGFzdCIsImEiOiJjaW8yb2J5b3kwMHg3dnZseTNoZ2JkbXllIn0.bd3CWy4tlOrSgX3g_PPi_w';
+mapboxgl.accessToken = 'pk.eyJ1IjoiaGFzdCIsImEiOiJjamozeTNodnkxZW10M2tzMjQyaW1kMjB1In0.bM_XJ7z_mVKOuv9mjujk-A';
 
 if (!mapboxgl.supported()) {
     $("#warningModal").modal("show");
